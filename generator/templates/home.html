@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Entry Input</h5>
+            <!-- Section of calculator -->
+            <form action="{% url 'calculations'%}">
+                <div class="form-group">
+                    <label for="redshift">$$\text{Redshift}$$</label>
+                    <input type="number" step="0.00000001" class="form-control" id="redshift" name="redshift" placeholder="Enter Redshift" value="{{ redshift }}" required="required">
+
+                    <label for="h0">$$H_0$$</label>
+                    <input type="number" step="0.001" class="form-control" id="h0" name="h0" placeholder="Enter Hubble constant (Default 69.6)" de=69.6>
+
+                    <label for="lambda">$$\lambda$$</label>
+                    <input type="number" step="0.001" class="form-control" id="lambda" name="lambda" placeholder="Enter Lambda (Default 0.714)" value="{{ lambda }}">
+
+                    <label for="lambda_matter">$$\lambda_m$$</label>
+                    <input type="number" step="0.001" class="form-control" id="lambda_matter" name="lambda_matter" placeholder="Enter Lambda Matter (Default 0.286)" value="{{ lambda_m }}">
+                </div>
+                <br>
+                <button class="btn btn-dark" type="submit">Calculate</button>
+            </form>
+            <br>
+            <br>
+            {% comment %} Section of file upload {% endcomment %}
+            <form method="post" enctype="multipart/form-data" action="{% url 'get_file'%}">
+                {% csrf_token %}
+                <label for="formFile" class="form-label">Select database file with redshift</label>
+                <input class="form-control" type="file" id="formFile" name="database_file" accept=".csv">
+                <br>
+                <br>
+                <button class="btn btn-dark" type="submit">Upload</button>
+            </form>
+            <br>
+            <br>
+            {% comment %} Formulas was used {% endcomment %}
+            <h5 class="card-title">Formulas</h5>
+            <p>$$\text{Hubble distance} = \frac{c}{H_0} \int_0^z \frac{dz'}{\sqrt{\Omega_m(1+z')^3 + \Omega_\Lambda}}$$</p>
+            <p>$$\text{Luminosity distance} = (1+z) \text{Hubble distance}$$</p>
+            <p>$$\text{Angular distance} = \frac{\text{Hubble distance}}{1+z}$$</p>
+            <p>$$\text{Diameter} = 2 \text{Angular distance}$$</p>
+            <p>$$\text{Kpc to arcseg} = \frac{206265}{H_0}$$</p>
+        </div>
+{% endblock %}

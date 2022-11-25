@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body table-responsive">
+        <h5 class="card-title">Data File</h5>
+        <table class="table table-responsive">
+            <thead class="table-dark">
+              <tr class="text-center">
+                {% comment %} Iterate over the columns {% endcomment %}
+                {% for col in df.columns %}
+                    <td>{{col}}</td>
+                {% endfor %}
+                </tr>
+            </thead>
+                    {% for index, row in df.iterrows %}
+                        {% if forloop.counter|divisibleby:2 %}
+                            <tr class="table-active">
+                        {% else %}
+                            <tr>
+                        {% endif %}
+                        {% for cell in row %}
+                            <td class="text-center">{{cell|floatformat:-2}}</td>
+                        {% endfor %}
+                            </tr>
+                    {% endfor %}
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-dark">File was saved in the current directory</button>
+    </div>
+</div>
+{% endblock %}

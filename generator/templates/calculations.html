@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card text-center text-dark bg-light col-md-auto">
+    <div class="card-header">
+        <h1>Results</h1>
+    </div>
+    <div class="col-md-4 offset-md-4">
+        <div class="card-body">
+            <label>Hubble distance</label>
+            <h2>$${{hubble}}$$</h2>
+            <label>Luminosity distance</label>
+            <h2>$${{luminosity}}$$</h2>
+            <label>Angular distance</label>
+            <h2>$${{angular}}$$</h2>
+            <label>Diameter</label>
+            <h2>$${{diameter}}$$</h2>
+            <label>Kpc to arcseg</label>
+            <h2>$${{kpc}}$$</h2>
+        </div>
+    </div>
+</div>
+{% endblock %}
